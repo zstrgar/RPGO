@@ -16,7 +16,7 @@ function p = bernstein2power(b)
 %       bazi od x^n do 1
 
 n = length(b)-1;
-p = [];
+p = zeros(n+1);
 
 for i=0:n
     for j=i:n

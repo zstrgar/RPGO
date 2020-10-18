@@ -1,0 +1,21 @@
+%Nariši Bernsteinove bazne polinome stopnje n
+
+x=0:0.1:1;
+
+n = 5;
+
+%bernsteinovi bazni polinomi zloženi v diagonalno matriko
+b = diag([]
+
+
+
+
+
+for i=0:n
+    p=bernstein2power(b(i));
+    y = polyval(p(i),x);
+    plot(x,y);
+    hold on
+end
+
+

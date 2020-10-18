@@ -13,17 +13,13 @@ function b = power2bernstein(p)
 %       pripadajo razvoju polinoma stopnje n v Bernsteinovi
 %       bazi od 0-tega do n-tega Bernsteinovega
 %       polinoma
-
-p = fliplr(p);
-n=length(p) - 1;
-
-%matrika koeficientov v bernsteinovi bazi
-b=zeros(n+1);
+n=length(p)-1;
+b=[];
 for i = 0:n
-    for j = i:n
-        b(i+1,j+1)= p(i+1) * nchoosek(j,i) / nchoosek(n,i);
+    for j = 1:n
+        b(i+1,j+1)= p(n-i)*nchoosek(j,i)/nchoosek(n,i);
     end
 end
-b=sum(b);    
+    
 end
 
