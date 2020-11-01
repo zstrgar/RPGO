@@ -23,7 +23,7 @@ end
 for i = 1:length(Bc)
     plotbezier(Bc{i},t);
     hold on;
-    daspect([1 1 1]);   %razmerje x:y=1:1
+    daspect([1 1 1]);   %razmerje x:y
 end
 
 %radialna napaka
