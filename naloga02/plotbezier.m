@@ -14,8 +14,8 @@ function plotbezier(B,t)
 %       vrednost Bezierjeve krivulje
 
 % poligon kontrolnih točk
-plot(B(:,1),B(:,2), '-o');
-hold on
+%plot(B(:,1),B(:,2), '-o');
+%hold on
 
 b = bezier(B,t);
 plot(b(:,1),b(:,2));
