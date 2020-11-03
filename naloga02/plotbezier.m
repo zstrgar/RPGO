@@ -13,9 +13,9 @@ function plotbezier(B,t)
 %  t    seznam parametrov dolzine k, pri katerih racunamo
 %       vrednost Bezierjeve krivulje
 
-% poligon kontrolnih točk
-%plot(B(:,1),B(:,2), '-o');
-%hold on
+%poligon kontrolnih točk
+plot(B(:,1),B(:,2), '-o');
+hold on
 
 b = bezier(B,t);
 plot(b(:,1),b(:,2));
