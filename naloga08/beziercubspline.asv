@@ -1,0 +1,60 @@
+function B = beziercubspline(u,D)
+% Opis:
+%  beziercubspline izracuna sestavljeno Bezierjevo krivuljo
+%  stopnje 3, ki je dvakrat zvezno odvedljiva v stikih
+%
+% Definicija:
+%  B = beziercubspline(u,D)
+%
+% Vhodna podatka:
+%  u    seznam parametrov delitve dolzine m+1,
+%  D    matrika, v kateri vsaka izmed m+3 vrstic predstavlja
+%       eno kontrolno tocko sestavljene krivulje
+%
+% Izhodni podatek:
+%  B    seznam dolzine m, v kateri je vsak element matrika s
+%       stirimi vrsticami, ki dolocajo kontrolne tocke kosa
+%       sestavljene krivulje
+[m,d] = size(D);
+m = m - 3;  %m = 4 pri kubičnih C2 zlepkih
+
+B0 = zeros(m,d);
+B1=zeros(m,d);
+B2=zeros(m,d);
+B3=zeros(m,d);
+
+
+%diference parametra u v seznamu
+dif = diff(u);
+
+
+%začetne robne toèke
+B0(1,:) = D(1,:); %b_0 = d_-1
+B0(2,:) = D(2,:); %b_1 = d_0
+B0(3,:) = dif(2)/(dif(1)+dif(2))*D(2,:) + dif(1)/(dif(1)+dif(2))*D(3,:); 
+
+%končne robne točke:
+B3(4,:) = D(end,:); %b_3(m)=d_(m+1)
+B3(3,:) = D(end - 1,:);
+B3(2, :) = dif(m)/(dif(m-1)+dif(m))*D(end-2,:) + dif(m-1)/(dif(m-1)+dif(m))*D(end-1,:);
+
+vmesne točke:
+for i = 1:(m-2)
+    B1(i+1) = (dif(i+1)+dif(i+2))/(dif(i)+dif(i+1)+dif(i+2))*D(i+2,:) + (dif(i))/(dif(i)+dif(i+1)+dif(i+2))*D(i+3,:);
+    B2(i+1) = (dif(i+2))/(dif(i)+dif(i+1)+dif(i+2))*D(i+2,:) + (dif(i)+dif(i+1))/(dif(i)+dif(i+1)+dif(i+2))*D(i+3,:);
+end
+
+for i =1:(m-1)
+    B3(i) = dif(i+1)/(dif(i)+dif(i+1))*B2(i) + dif(i)/(dif(i)+dif(i+1))*B1(i+1);
+    B0(i+1) = dif(i+1)/(dif(i)+dif(i+1))*B2(i) + dif(i)/(dif(i)+dif(i+1))*B1(i+1);
+end
+
+B = {B0, B1, B2, B3};
+
+            
+    
+
+
+
+
+end
