@@ -1,7 +1,7 @@
 function db = bezierCPder(B,r)
 % Opis:
 %  Bezier Control points of derivative
-%  bezierCTder vrne točke na krivulji, ki predstavlja dane Bezierjeve krivulje 
+%  bezierCPder vrne točke na krivulji, ki predstavlja odvod dane Bezierjeve krivulje 
 %
 % Definicija:
 %  db = bezierCPder(B,r)

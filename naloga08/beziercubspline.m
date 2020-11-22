@@ -16,17 +16,15 @@ function B = beziercubspline(u,D)
 %       stirimi vrsticami, ki dolocajo kontrolne tocke kosa
 %       sestavljene krivulje
 [m,d] = size(D);
-m = m - 3;  %m = 4 pri kubičnih C2 zlepkih
+m = m - 3;  %m = 4 pri kubičnih C2 zlepkih s podanimi 7 točkami
 
-B0 = zeros(m,d);
+B0=zeros(m,d);
 B1=zeros(m,d);
 B2=zeros(m,d);
 B3=zeros(m,d);
 
-
 %diference parametra u v seznamu
 dif = diff(u);
-
 
 %začetne robne toèke
 B0(1,:) = D(1,:); %b_0 = d_-1
@@ -34,9 +32,9 @@ B0(2,:) = D(2,:); %b_1 = d_0
 B0(3,:) = dif(2)/(dif(1)+dif(2))*D(2,:) + dif(1)/(dif(1)+dif(2))*D(3,:); 
 
 %končne robne točke:
-B3(4,:) = D(end,:); %b_3(m)=d_(m+1)
-B3(3,:) = D(end - 1,:);
-B3(2, :) = dif(m)/(dif(m-1)+dif(m))*D(end-2,:) + dif(m-1)/(dif(m-1)+dif(m))*D(end-1,:);
+B4(4,:) = D(end,:); %b_3(m)=d_(m+1) 
+B4(3,:) = D(end - 1,:);
+B4(2, :) = dif(m)/(dif(m-1)+dif(m))*D(end-2,:) + dif(m-1)/(dif(m-1)+dif(m))*D(end-1,:);
 
 B = {B0, B1, B2, B3};
 
@@ -51,12 +49,6 @@ for i =1:(m-1)
     B{i+1}(1,:) = dif(i+1)/(dif(i)+dif(i+1))*B{i}(3,:) + dif(i)/(dif(i)+dif(i+1))*B{i+1}(2,:);
 end
 
-B;
-
-            
+B;  
     
-
-
-
-
 end

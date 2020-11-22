@@ -1,6 +1,6 @@
 %Nariši Bernsteinove bazne polinome stopnje n
 
-x=0:0.01:1;
+x=[0:0.01:1];
 
 n = 5;
 
