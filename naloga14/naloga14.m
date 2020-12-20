@@ -8,6 +8,9 @@ m=3;n=4;
 
 Sz=lsqbezier2spline(5,4,3,4,P);
 
-%Vrednosti (bx,by,bz) na mrezi 
-
+[Bx,By] = meshgrid(linspace(-3,3,10),linspace(-3,3,10));
+Bz = lsqbezier2(m,n,P);
+%Vrednosti (bx,by,bz) na mrezi [U,V]=...:
 [U,V] = meshgrid(linspace(0,1,10));
+bx=3*U;
+by=3*V;

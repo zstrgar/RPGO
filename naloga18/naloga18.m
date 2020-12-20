@@ -69,13 +69,56 @@ Hf = @(x,y) [dxxf(x,y) dxyf(x,y); dxyf(x,y) dyyf(x,y)];
 %Argyrisov zlepek:
 S = argyrisspline(tri, f, Df, Hf);
 
-%točke
-T = zeros(10,1);
-%x koordinate:
-for i=0:10
-    for j=0:10
-        T(i+1,j+1) = [6*i/10-3, 6*j/10-3];
+%zberemo x,y
+%testis za 10x10
+% Vrednosti na kvadratu [-3,3] x [-3,3] diskretiziranem z mrezo velikosti 10 x 10:
+[Bx,By] = meshgrid(linspace(-3,3,10),linspace(-3,3,10));
+
+len = length(Bx(1,:));
+for i = 1:len
+    for j = 1:len
+        x = Bx(j,i);
+        y = By(j, i);
+        [ID, bar] = pointLocation(tri, x, y);
+        Si = S{ID};
+        b_test(j,i) = decasteljau3(Si, bar);
     end
 end
 
-T
+% Maksimalna absolutna napaka aproksimacije funkcije f na mrezi 101 x 101:
+[Bx,By] = meshgrid(linspace(-3,3,101),linspace(-3,3,101));
+
+len = length(Bx(1,:));
+b = zeros(len);
+for i = 1:len
+    for j = 1:len
+        x = Bx(j,i);
+        y = By(j, i);
+        [ID, bar] = pointLocation(tri, x, y);
+        Si = S{ID};
+        b(j,i) = decasteljau3(Si, bar);
+    end
+end
+
+Z = peaks(101);
+% maksimalna absolutna napaka
+max(max(abs(b-Z)))
+
+% graf triangulacije
+n = length(V(:,1));
+figure()
+trimesh(TRI, V(:,1), V(:,2), zeros(n,1), 'edgecolor', 'black', 'facecolor', 'none')
+axis([-3 3 -3 3])
+title('Triangulacija')
+
+% Graf Argyrisovega zlepka za funkcijo peaks
+
+figure()
+surf(Bx, By, b)
+axis([-3 3 -3 3])
+title('Argyrisov zlepek za funkcijo peaks')
+
+figure()
+surf(Bx, By, Z)
+axis([-3 3 -3 3])
+title('Funkcija peaks')

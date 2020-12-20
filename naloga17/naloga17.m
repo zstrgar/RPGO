@@ -62,11 +62,43 @@ Hf = @(x,y) [dxxf(x,y) dxyf(x,y); dxyf(x,y) dyyf(x,y)];
 Bz = argyris(T,f,Df,Hf);
 
 
+% Vrednosti polinoma v domenskih tockah za N = 10 
+%(prva dva stolpca sta kartezicni koordinati domenske tocke, tretji pa vrednost polinoma):
+[TRI,U] = trimeshgrid(10);
 
+n = length(U);
+V = ones(3);
+V(2:3,:) = T';
+b_test = zeros(n, 3);
+for i = 1:n
+    x_tmp = V*U(i,:)';
+    b_test(i,[1 2]) = x_tmp(2:3)'; 
+    b_test(i,3) = decasteljau3(Bz, U(i,:));
+end
 
+% Maksimalna absolutna napaka aproksimacije funkcije f v domenskih tockah trikotnika T za N = 50:
+[TRI,U] = trimeshgrid(50);
 
+n = length(U(:,1));
+V = ones(3);
+V(2:3,:) = T';
+b = zeros(n, 3);
+for i = 1:n
+    x_tmp = V*U(i,:)';
+    b(i,[1 2]) = x_tmp(2:3)'; 
+    b(i,3) = decasteljau3(Bz, U(i,:));
+end
 
+Z = peaks(b(:,1),b(:,2));
+norm(b(:,3)-Z(:),Inf)
 
+figure()
+trisurf(TRI,b(:,1),b(:,2),b(:,3))
+title('Argyrisov polinom')
+
+figure()
+trisurf(TRI,b(:,1),b(:,2),Z)
+title('Funkcija peaks')
 
 
 

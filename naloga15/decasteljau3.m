@@ -1,33 +1,25 @@
-function b = decasteljau3 (Bx,By,Bz,U)
-% Opis :
-%  decasteljau3 izračuna vrednost polinoma dveh spremenljivk v točki U
-%
-% Definicija :
-%  b = decasteljau3 (Bx, By, Bz, U)
-%
-% Vhodni podatki :
-%   Bx, By, Bz  matrike velikosti n+1 x n+1 , ki predstavlja
-%               koeficiente polinoma dveh spremenljivk stopnje n v
-%               Bezierjevi obliki (element matrike na mestu (i,j),
-%               j <= n+2 -i, določa koeficient polinoma z indeksom
-%               (n+2-i-j, j-1 , i-1) ),
-%   U           matrika velikosti 1 x 3 , ki predstavlja baricentrične 
-%               koordinate točk glede na domenski trikotnik
-%
-% Izhodni podatek :
-%   b      vrednost razcveta polinoma , določenega z matrikami Bx, By, Bz
-%          v točki U
+function [b0] = decasteljau3(B,U)
+% DeCasteljaujev postopek na trikotniku U vrstica, kjer so baricentrične
+% koordinate točk, glede na trikotnik, za katerega delamo razcvet. 
 
-%stopnja
-n = size(Bx,1)-1;
+n1 = size(B,1);
+n = n1-1;
+u = zeros(n,3);
 
-%naredimo seznam baricentricnih koordinat
-bar = repmat(U,n,1);
+[m d] = size(U);
 
-%za vsako koordinato b naredimo blossom3
-bx = blossom3(Bx,bar);
-by = blossom3(By,bar);
-bz = blossom3(Bz,bar);
+% v matriki u so vse iste vrstice, kot v U < n-krat zapišemo vrstico z
+% baricentričnimi koordinbatami točke
 
-b = [bx, by, bz];
+b0=zeros(m,1);
+
+for k=1:m
+    t= U(k,:);
+    for i = 1:n
+        u(i,:)=t; %decasteljev seveda izvede blossom na vsakem koraku decastelj. algoritma
+    end
+    b0(k)=blossom3(B,u);
+end
+
+b0=b0;
 end
