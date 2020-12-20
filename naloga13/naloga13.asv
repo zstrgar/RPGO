@@ -47,6 +47,5 @@ hold on
 
 
 %aproksimacija ploskev za peaks:
-[bx,by,bz]=bezier2(Bx, By, Bz, u,v);
-beziersurf(bx, by, bz, 50);
+beziersurf(bezier, 50);
 hold on
