@@ -1,9 +1,0 @@
-%=== 16. NALOGA ===
-
-%Generiranje trikotne mreze:
-[TRI,U] = trimeshgrid(10);
-
-%Kontrolne točke trikotne Bezierjeve ploskve:
-Bx = [0 2 6 8;
-    1 3 7 NaN;
-    ]
