@@ -10,6 +10,10 @@ P3=[4,2]; BP3 = pointbary(P3, T);
 %vse te točke spravim v eno matriko, da bom lažje računala v nadaljevanju
 BP = [BP1; BP2; BP3];
 
+%Baricentrične koordinate vektorjev:
+x=[1,0]; xb = vectorbary(x, T);
+y=[0,1]; yb = vectorbary(y, T);
+
 %Koeficienti polinoma p v Bezierjevi obliki:
 B = [2 1 -1 0;
     5 3 -4 NaN;
@@ -25,13 +29,7 @@ for i=1:n
     Vp(i) = blossom3(B, repmat(BP(i,:), r, 1));   % r-kratna ponovitev točk
 end
 
-
-%====== OVODI =====
-%Baricentrične koordinate smernih vektorjev:
-x=[1,0]; xb = vectorbary(x, T);
-y=[0,1]; yb = vectorbary(y, T);
-
-%===== 1. dovodi =====
+%Prvi dovodi
 
 %smer x:
 n=length(BP);
@@ -49,24 +47,16 @@ end
 
 
 %====== 2. ODVODI =========
-% smer x, x
+%smer x, x
 n=length(BP);
 Dxx = zeros(n,1); % v Dxx so zbrane vrednosti 2. odvodov s smeri x v točkah iz bP
 for i =1:n
     Dxx(i) = factorial(n)/factorial(n-2)*blossom3(B, [xb; xb; repmat(BP(i,:),n-2,1)]);
 end
 
-% smer y, y
-n=length(BP);
-Dyy = zeros(n,1); % v Dyy so zbrane vrednosti 2. odvodov s smeri y v točkah iz bP
-for i =1:n
-    Dyy(i) = factorial(n)/factorial(n-2)*blossom3(B, [yb; yb; repmat(BP(i,:),n-2,1)]);
-end
 
 
-% mešani (x, y)
-n=length(BP);
-Dxy = zeros(n,1); % v Dxy so zbrane vrednosti 2. odvodov s smereh x, y v točkah iz bP
-for i =1:n
-    Dxy(i) = factorial(n)/factorial(n-2)*blossom3(B, [xb; yb; repmat(BP(i,:),n-2,1)]);
-end
+
+    
+    
+    

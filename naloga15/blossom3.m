@@ -20,21 +20,16 @@ function b = blossom3(B,U)
 %  b    vrednost razcveta polinoma, dolocenega z matriko B,
 %       v tockah, dolocenih z matriko U
 
-
 %stopnja
 n = size(U,1);
 
 %naredimo en razcvet
-
 for r=1:n
 u = U(r,1);
 v = U(r,2);
 w = U(r,3);
-
-%cez vrstice
-    for i = 1:((n+1)- r)
-        %cez stolpce
-        for j = 1:((n+1)- r)
+    for i = 1:((n+1)- r)    % gremo čez vrstice
+        for j = 1:((n+1)- r)    %gremo čez stolpce
             B(i,j) = u*B(i,j)+v*B(i,j+1)+w*B(i+1,j);
         end
     end

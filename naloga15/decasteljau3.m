@@ -1,12 +1,12 @@
 function b = decasteljau3 (Bx,By,Bz,U)
 % Opis :
-%  decasteljau3 izračuna vrednost polinoma dveh spremenljivk
+%  decasteljau3 izračuna vrednost polinoma dveh spremenljivk v točki U
 %
 % Definicija :
 %  b = decasteljau3 (Bx, By, Bz, U)
 %
 % Vhodni podatki :
-%   Bx, By, Bz  matrika velikosti n+1 x n+1 , ki predstavlja
+%   Bx, By, Bz  matrike velikosti n+1 x n+1 , ki predstavlja
 %               koeficiente polinoma dveh spremenljivk stopnje n v
 %               Bezierjevi obliki (element matrike na mestu (i,j),
 %               j <= n+2 -i, določa koeficient polinoma z indeksom

@@ -1,11 +1,11 @@
-function V = vectorbarry(P, T)
+function V = vectorbary(P, T)
 % Opis:
 %  vectorbarry kartezične koordinate (x,y) krajevnega vektorja
 %  P-0 pretvori v baricentrične
 %  koordinate (u, v, w) glede na trikotnik T
 %
 % Definicija: 
-%  U = vectorbarry(P, T)
+%  U = vectorbary(P, T)
 %
 % Vhodna podatka:
 %  P     krajevni vektor točke P
@@ -20,7 +20,7 @@ for i=1:3
     M(:, i) = [1; (T(i,:))'];
 end
 
-P = [0; P'];
+P = [0; P'];   %razlika med pointbary in vectorbary je v prvi komponenti
 
 V = (linsolve(M,P))';
 end

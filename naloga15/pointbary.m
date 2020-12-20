@@ -1,10 +1,10 @@
-function U = pointbarry(P, T)
+function U = pointbary(P, T)
 % Opis:
-%  pointbarry kartezične koordinate (x,y) točke P pretvori v baricentrične
+%  pointbary kartezične koordinate (x,y) točke P pretvori v baricentrične
 %  koordinate (u, v, w) glede na trikotnik T
 %
 % Definicija: 
-%  U = pointbarry(P, T)
+%  U = pointbary(P, T)
 %
 % Vhodna podatka:
 %  P     točka s kartezičnimi koordinatami
@@ -13,8 +13,7 @@ function U = pointbarry(P, T)
 % Izhodni podatek:
 %  U     točka z baricentričnimi koordinatami glede na trikotnik T
 
-
-M=zeros(3, 3);
+M=zeros(3, 3);  % matrika
 for i=1:3
     M(:, i) = [1; (T(i,:))'];
 end
