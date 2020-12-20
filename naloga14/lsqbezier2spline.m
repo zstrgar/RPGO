@@ -24,7 +24,7 @@ function S = lsqbezier2spline(M,N,m,n,P)
 
 U = linspace(0,1,M+1); % delitev intervala [0,1] v smeri u
 V = linspace(0,1,N+1); % delitev intervala [0,1] v smeri v
-S = cell(N,M); % A ni tle mogoče N x M??
+S = cell(N,M); 
 
 % za vsak par (I,J) določimo kontrolne za Bezierjevo ploskev po MNK za
 % interval [U_I-1,U_I]x[V_J-1,V_J]
