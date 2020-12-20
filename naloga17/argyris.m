@@ -92,10 +92,10 @@ r21 = V2-V1;
 n12 = null(r21(:)')';
 bar1 = vectorbary(n12, T);
 r32 = V3-V2;
-n23=null(r32(:)')'
+n23=null(r32(:)')';
 bar2 = vectorbary(n23,T);
 r31 = V3-V1;
-n31=null(r31(:)')'
+n31=null(r31(:)')';
 bar3 = vectorbary(n31,T);
 
 %točka (2,2,1)

@@ -1,6 +1,15 @@
-%=== 17. NALOGA =====
-%Trikotnik T:
-T = [-1.7 -1; -0.5 -1; -0.5 0];
+%=== 18. NALOGA ====
+
+
+
+%triangulacija:
+V = [ -3 -3; -3 -2; -3 1; -3 3; -1.7 -1; -1.6 0.5; ...
+-1.5 1.7; -1.1 -3; -0.9 -2; -0.7 1; -0.5 -1; ...
+-0.5 0; -0.5 3; -0.4 1.6; 0 -2; 0.5 -1; 0.5 0.5; ...
+0.6 1.2; 0.7 -0.4; 1 2.2; 1.2 -3; 1.2 -1.6; 1.6 3; ...
+2 -1; 2 0.6; 3 -3; 3 -1.8; 3 -0.4; 3 1.7; 3 3];
+TRI = delaunay ( V ) ;
+tri = triangulation ( TRI , V ) ;
 
 %Funkcija f:
 f = @(x,y) 3*(1-x).^2.*exp(-x.^2 - (y+1).^2) ...
@@ -57,19 +66,16 @@ dyyf = @(x,y) (2*exp(-(x+1).^2 - y.^2))/3 ...
 Hf = @(x,y) [dxxf(x,y) dxyf(x,y); dxyf(x,y) dyyf(x,y)];
 
 
+%Argyrisov zlepek:
+S = argyrisspline(tri, f, Df, Hf);
 
-%Izracun koeficientov Argyrisovega polinoma:
-Bz = argyris(T,f,Df,Hf);
+%točke
+T = zeros(10,1);
+%x koordinate:
+for i=0:10
+    for j=0:10
+        T(i+1,j+1) = [6*i/10-3, 6*j/10-3];
+    end
+end
 
-
-
-
-
-
-
-
-
-
-
-
-
+T
